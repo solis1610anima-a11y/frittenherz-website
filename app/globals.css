@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ────────── Design Tokens ────────── */
+:root {
+  --color-pink-primary: #FBDDE7;
+  --color-pink-soft: #FACFD7;
+  --color-pink-muted: #FCD7E6;
+  --color-dark-bg: #121316;
+  --color-dark-surface: #18191E;
+  --color-dark-card: #1F2027;
+  --color-dark-card-hover: #262832;
+  --color-border: rgba(251, 221, 231, 0.14);
+  --color-border-strong: rgba(251, 221, 231, 0.32);
+
+  /* Font stacks — loaded via <link> in layout.tsx */
+  --font-faculty: 'Faculty Glyphic', serif;
+  --font-caslon: 'Libre Caslon Text', serif;
+  --font-fragment: 'Fragment Mono', monospace;
+}
+
+/* ────────── Base ────────── */
+body {
+  background-color: var(--color-dark-bg);
+  color: var(--color-pink-primary);
+  font-family: var(--font-inter), 'Inter', ui-sans-serif, system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--color-pink-primary);
+  color: var(--color-dark-bg);
+}
+
+/* ────────── Font utility classes ────────── 
+   These ensure Tailwind's font-display / font-editorial / font-mono
+   map to the correct Google Fonts families loaded via <link>.
+*/
+.font-display {
+  font-family: var(--font-faculty) !important;
+}
+
+.font-editorial {
+  font-family: var(--font-caslon) !important;
+  font-style: italic;
+}
+
+.font-mono {
+  font-family: var(--font-fragment) !important;
+}
+
+/* ────────── Scrollbar ────────── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-dark-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(251, 221, 231, 0.25);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-pink-primary);
+}
+
+/* ────────── Marquee animations ────────── */
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes marquee-scroll-reverse {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 32s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.animate-marquee-reverse {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll-reverse 35s linear infinite;
+}
+.animate-marquee-reverse:hover {
+  animation-play-state: paused;
+}
+
+/* ────────── Range slider (Calculator) ────────── */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 9999px;
+  background: linear-gradient(to right, #FBDDE7 0%, #FBDDE7 var(--range-pct, 12%), #1F2027 var(--range-pct, 12%), #1F2027 100%);
+  outline: none;
+  cursor: pointer;
+}
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #FBDDE7;
+  border: 3px solid #121316;
+  box-shadow: 0 0 12px rgba(251, 221, 231, 0.3);
+  cursor: grab;
+}
+input[type='range']::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #FBDDE7;
+  border: 3px solid #121316;
+  box-shadow: 0 0 12px rgba(251, 221, 231, 0.3);
+  cursor: grab;
+}
+
+/* ────────── Smooth scroll snap for Fuhrpark ────────── */
+.scroll-snap-x {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.scroll-snap-x > * {
+  scroll-snap-align: start;
+}
+
+/* Hide scrollbar for horizontal sliders */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
